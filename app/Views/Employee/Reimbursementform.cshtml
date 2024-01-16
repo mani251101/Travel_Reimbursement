@@ -1,0 +1,134 @@
+@using Reimbursementform.Models;
+@model Reimbursementforms
+@{
+  var emp = ViewContext.HttpContext.Session.GetString("email");
+}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Travel Reimbursement</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet" />
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-Light">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3" href="Index.cshtml">Travel Reimbursement</a>
+            <div class="navbar-brand ps-3" style="margin-left: 58%;">
+            <Partial name="_LoginPartial"/>
+            </div>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav"></br>
+
+                            <a class="nav-link" asp-action="Profile" asp-controller="Employee">
+                                <div class="sb-nav-link-icon"><i class="fas fa-user-alt"></i></div>
+                                Profile
+                            </a>
+
+                            <a class="nav-link" asp-action="Reimbursementform" asp-controller="Employee">
+                                <div class="sb-nav-link-icon"><i class="fas fa-file"></i></div>
+                                Reimbursement
+                            </a>
+
+                            <a class="nav-link" asp-action="Myrequest" asp-controller="Employee">
+                                <div class="sb-nav-link-icon"><i class="fas fa-clock"></i></div>
+                                My Request
+                            </a>
+                            
+							<a class="nav-link" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt"></i></div> 
+                                Logout
+                            </a>
+
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages"> 
+                                </nav>
+                            </div>
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    </br>
+	<h3 style="margin-left: 30%;">Travel Reimbursement Form</h3>
+	<form class="row g-2" enctype="multipart/form-data" method="post">
+		<div class="col-md-5" style="margin-left: 7%;">
+			<label for="validation" class="form-label">Name</label>
+			<input class="form-control" type="text" aria-label="default input example" asp-for="Name">
+			<span asp-validation-for="Name" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-5">
+			<label asp-for="EmailId" class="form-label">Email Id</label>
+			<input class="form-control" type="email" aria-label="default input example" asp-for="EmailId" value="@emp">
+			<span asp-validation-for="EmailId" class="text-danger"></span>
+		</div>
+
+
+		<div class="col-md-5" style="margin-left: 7%;">
+			<label asp-for="Mobilenumber" class="form-label">Mobile Number</label>
+			<input class="form-control" type="number" aria-label="default input example" asp-for="Mobilenumber">
+			<span asp-validation-for="Mobilenumber" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-5">
+			<label for="validation" class="form-label">Amount</label>
+			<input class="form-control" type="number" aria-label="default input example" asp-for="Amount">
+			<span asp-validation-for="Amount" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-5" style="margin-left: 7%;">
+			<label asp-for="Purpose" class="form-label">Purpose</label>
+			<input class="form-control" type="text" aria-label="default input example" asp-for="Purpose">
+			<span asp-validation-for="Purpose" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-5">
+			<label asp-for="ModeofTransport" class="form-label">Mode of Travel</label>
+			<select class="form-select" aria-label="Default select example" asp-for="ModeofTransport">
+  			<option selected></option>
+  			<option value="airfare">airfare</option>  
+  			<option value="Cab">cab</option>
+  			<option value="Bus">Bus</option>
+            <option value="Others">Others</option>
+			</select>
+			<span asp-validation-for="ModeofTransport" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-5" style="margin-left: 7%;">
+			<label asp-for="Image" class="control-label">Add Receipt</label>
+			<input class="form-control" type="file" asp-for="Image" id="receipt"/>
+			<span asp-validation-for="Image" class="text-danger"></span>
+		</div>
+
+		<div class="col-md-5">
+			<label asp-for="Date">Date</label>
+			<input class="form-control" name="date" type="date" asp-for="Date"/>
+		</div>
+
+		<div class="col-md-10" style="margin-left: 7%;">
+  			<label asp-for="Description" class="form-label">Description</label>
+  			<textarea class="form-control" id="exampleFormControlTextarea1" rows="2" asp-for="Description"></textarea>
+			<span asp-validation-for="Description" class="text-danger"></span>
+		</div>
+		</br>
+
+		<div class="col-md-5" style="margin-left: 7%;">
+			<button class="btn btn-primary" type="cancel">Cancel</button>&nbsp; &nbsp;
+			<button class="btn btn-primary" type="submit">Submit form</button>
+		</div>
+	</form>
+                </main>
+            </div>
+            </body>
+</html>

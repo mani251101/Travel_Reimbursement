@@ -1,0 +1,63 @@
+@using Reimbursementform.Models
+@model Reimbursementforms
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<dl class="row">
+    <div class = "col-sm-6">
+<h1 style="color: rgb(43, 159, 226);">@Html.DisplayFor(model => model.Name)</h1>
+    
+    <h5>@Html.DisplayNameFor(model => model.EmailId)  :    @Html.DisplayFor(model => model.EmailId)</h5>
+    <h5>@Html.DisplayNameFor(model => model.Mobilenumber)  :    @Html.DisplayFor(model => model.Mobilenumber)</h5>
+</div>
+<div class = "col-sm-6">
+<dd ></br>
+           <a href="@Url.Content("~/Receipt/" + Model.Receipt )"><img src="@Url.Content("~/Receipt/" + Model.Receipt )" width="200" height="200" class="rounded float-end" curser="pointer" /></a>
+        </dd>
+</dl></div>
+
+<dl class="row">
+<div style="margin-left: 4%;">
+    <a asp-action="Inbox" asp-controller="Manager" class="btn btn-info float-start">Back to List</a>    
+</div>
+</dl>
+<div>
+    
+    <hr />
+    <dl class="row">
+        <div class="row" style="margin-left: 3%;">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ModeofTransport)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.ModeofTransport)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Purpose)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.Purpose)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        </div>
+    </dl>
+</div>

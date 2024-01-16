@@ -1,0 +1,108 @@
+@using Reimbursementform.Models;
+@model IEnumerable<Reimbursementforms>
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Travel Reimbursement</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet" />
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-Light">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3" href="Index.cshtml">Travel Reimbursement</a>
+            <div class="navbar-brand ps-3" style="margin-left: 58%;">
+            <Partial name="_LoginPartial"/>
+            </div>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav"></br>
+
+                            <a class="nav-link" asp-action="Profile" asp-controller="Manager">
+                                <div class="sb-nav-link-icon"><i class="fas fa-user-alt"></i></div>
+                                Profile
+                            </a>
+
+                            <a class="nav-link" asp-action="Inbox" asp-controller="Manager">
+                                <div class="sb-nav-link-icon"><i class="fas fa-user-alt"></i></div>
+                                Inbox 
+                            </a>
+                        
+							<a class="nav-link" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt"></i></div> 
+                                Logout
+                            </a>
+
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages"> 
+                                </nav>
+                            </div>
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid">
+<div class="row">
+<div class="row" style="height 2cm"></div>
+<div class="row">
+    <div class="col-md-10">
+</div>
+</div>
+</br>
+<div class="head-title">
+				<div class="left">
+				</div>
+			</div>
+<div class="table-data">
+				<div class="order">
+					<div class="head">
+						<h3>Request</h3>
+						<i class='bx bx-search' ></i>
+						<i class='bx bx-filter' ></i>
+					</div>
+					<table>
+						
+						<thead>
+							<tr>
+                                <th>Name</th>
+                                <th>Mobile Number</th>
+                                <th>Purpose</th>
+                                <th>Status</th>&nbsp;
+							</tr>
+						</thead>
+						<tbody>
+                    @foreach (var p in Model)
+                    {
+							<tr>
+                                <td>@p.Name</td>
+                                <td>@p.Mobilenumber</td>
+                                <td>@p.Purpose</td>
+								<td><button type="button" class="btn btn-outline-danger">
+								<a asp-action="Rejected" asp-controller="Manager" asp-route-id="@p.FormId">Reject</a></button></td>
+								<td><button type="button" class="btn btn-outline-primary"><a asp-action="Reimbursementdetails" asp-controller="Manager" asp-route-id="@p.FormId">View</a></button></td>
+                                <td><button type="button" class="btn btn-outline-success"><a asp-action="Approved" asp-controller="Manager" asp-route-id="@p.FormId">Approve</a></button></td>
+							</tr>
+                    }
+						</tbody>
+					</table>
+				</div>
+                </main>
+            </div>
+        </body>
+</html>
+<style>
+    td,th{
+        padding: 40px;
+    }
+</style>

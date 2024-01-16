@@ -1,0 +1,98 @@
+@using Microsoft.AspNetCore.Identity;
+@model IEnumerable<IdentityRole>;
+
+    <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Travel Reimbursement</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet" />
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>    
+      </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-Light">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3" href="Index.cshtml">Travel Reimbursement</a>
+            <div class="navbar-brand ps-3" style="margin-left: 58%;">
+            <Partial name="_LoginPartial"/>
+            </div>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav"></br>
+
+                            <a class="nav-link" asp-action="Profile" asp-controller="Admin">
+                                <div class="sb-nav-link-icon"><i class="fas fa-user-alt"></i></div>
+                                Profile
+                            </a>
+
+                            <a class="nav-link" id="register" asp-area="Identity" asp-page="/Account/Register">
+                                <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
+                                Add Employee
+                            </a>
+
+                            <a class="nav-link" asp-action="Employeelist" asp-controller="Admin">
+                                <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
+                                Employee List
+                            </a>
+
+                            <a class="nav-link" asp-action="Loginstatus" asp-controller="Admin">
+                                <div class="sb-nav-link-icon"><i class="fas fa-clock"></i></div>
+                                Login Status
+                            </a>
+                            
+                            <a class="nav-link" asp-area="" asp-controller="Roles" asp-action="Create">
+                            <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
+                                Roles
+                            </a>
+
+							              <a class="nav-link" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt"></i></div> 
+                                Logout
+                            </a>
+
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages"> 
+                                </nav>
+                            </div>
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <a asp-action="Create" asp-controller="Roles">create roles</a>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model=>model.Id)</th>
+
+                                <th>@Html.DisplayNameFor(model=>model.Name)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(var i in Model)
+                            {
+                                <tr>
+                                    <td>@i.Id</td>
+
+                                    <td>@i.Name</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </main>
+            </div>
+            </body>
+</html>
+<style>
+    td,th{
+        padding: 15px;
+    }
+</style>

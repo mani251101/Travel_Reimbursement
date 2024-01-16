@@ -1,0 +1,199 @@
+﻿@page
+@model RegisterModel
+@using app.Areas.Identity.Pages.Account
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Travel Reimbursement</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet" />
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-Light">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3" href="Index.cshtml">Travel Reimbursement</a>
+            <div class="navbar-brand ps-3" style="margin-left: 58%;">
+            <Partial name="_LoginPartial"/>
+            </div>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav"></br>
+
+                            <a class="nav-link" asp-action="Profile" asp-controller="Admin">
+                                <div class="sb-nav-link-icon"><i class="fas fa-user-alt"></i></div>
+                                Profile
+                            </a>
+
+                            <a class="nav-link" id="register" asp-area="Identity" asp-page="/Account/Register">
+                                <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
+                                Add Employee
+                            </a>
+
+                            <a class="nav-link" asp-action="Employeelist" asp-controller="Admin">
+                                <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
+                                Employee List
+                            </a>
+
+                            <a class="nav-link" asp-action="Loginstatus" asp-controller="Admin">
+                                <div class="sb-nav-link-icon"><i class="fas fa-clock"></i></div>
+                                Login Status
+                            </a>
+                            
+                            <a class="nav-link" asp-area="" asp-controller="Roles" asp-action="Create">
+                            <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
+                                Roles
+                            </a>
+
+							<a class="nav-link" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <div class="sb-nav-link-icon"><i class="fas fa-right-from-bracket"></i></div> 
+                                Logout
+                            </a>
+
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages"> 
+                                </nav>
+                            </div>
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md">
+        <form class="row g-2" id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" enctype="multipart/form-data"></br>
+            </br></br><h2>Adding Employee</h2>
+            
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="col-md-5">
+            <div class="form-floating">
+                <input asp-for="Input.Firstname" class="form-control" autocomplete="firstname" aria-required="true" />
+                <label asp-for="Input.Firstname"></label>
+                <span asp-validation-for="Input.Firstname" class="text-danger"></span>
+            </div></div></br>
+
+            <div class="col-md-5">
+            <div class="form-floating">
+                <input asp-for="Input.Lastname" class="form-control" autocomplete="lastname" aria-required="true" />
+                <label asp-for="Input.Lastname"></label>
+                <span asp-validation-for="Input.Lastname" class="text-danger"></span>
+            </div></div></br>
+
+            <div class="col-md-5">
+            <div class="form-floating">
+                <input asp-for="Input.DateofBirth" class="form-control" aria-required="true" type="date" value="@Model.Input.DateofBirth.ToString("dd-mm-yyyy")"/>
+                <label asp-for="Input.DateofBirth"></label>
+                <span asp-validation-for="Input.DateofBirth" class="text-danger"></span>
+            </div></div></br>
+
+            <div class="col-md-5">
+               <div class="form-group">
+                    <label>Gender:</label>
+                    <div class="form-check">
+                        <input asp-for="Input.Gender" type="radio" value="Male" class="form-check-input" />
+                        <label asp-for="Input.Gender" class="form-check-label">Male</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="Input.Gender" type="radio" value="Female" class="form-check-input" />
+                        <label asp-for="Input.Gender" class="form-check-label">Female</label>
+                    </div>
+                </div>
+            </div></br>
+
+            <div class="col-md-5">
+            <div class="form-floating">
+                <input asp-for="Input.PhoneNumber" class="form-control" autocomplete="PhoneNumber" aria-required="true" />
+                <label asp-for="Input.PhoneNumber"></label>
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div></div></br>
+
+            <div class="col-md-5">
+            <div class="form-floating">
+                <input type="file" asp-for="Input.ProfilePictureFile" class="form-control" accept="image*/"/>
+				@* <label asp-for="Input.ProfilePicture"></label> *@
+                <span asp-validation-for="Input.ProfilePictureFile" class="text-danger"></span>
+            </div></div></br>
+
+            <div class="col-md-5">
+            <div class="form-floating">
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                <label asp-for="Input.Email"></label>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div></div></br>
+
+            <div class="col-md-5">
+            <div class="form-floating">
+                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
+                <label asp-for="Input.Password"></label>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div></div></br>
+
+            <div class="col-md-5">
+            <div class="form-floating">
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
+                <label asp-for="Input.ConfirmPassword"></label>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div></div></br>
+
+            <div class="col-md-5">
+            <div class="form-floating">
+                <select asp-for="Input.Role" asp-items="@Model.Input.Rolelist" class="form-select" aria-required="true">
+                 <option disabled selected>select role</option>
+                </select>
+                <span asp-validation-for="Input.Role" class="text-danger"></span>
+            </div></div></br>
+            <div class="col-md-2" style="margin-left: 1%;">
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button></div>
+        </form>
+    </div>
+</div>
+    @* <div class="col-md-6 col-md-offset-2">
+        <section>
+            <h3>Use another service to register.</h3>
+            <hr />
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                    <div>
+                        <p>
+                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
+                            about setting up this ASP.NET application to support logging in via external services</a>.
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <div>
+                            <p>
+                                @foreach (var provider in Model.ExternalLogins)
+                                {
+                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                }
+                            </p>
+                        </div>
+                    </form>
+                }
+            }
+        </section>
+    </div> *@
+</div></div>
+</main>
+</body>
+</html>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

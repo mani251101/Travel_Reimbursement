@@ -1,0 +1,14 @@
+﻿@model ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+@* <h4 class="text-danger">Unauthorized User</h4>
+<h5 class="text">Please Log in</h5>
+
+<a class="nav_menu_link" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+
+ *@
+
+<h2 class="text-danger">Error</h2>
+<h5>@ViewBag.ErrorMessage</h5>

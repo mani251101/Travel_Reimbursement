@@ -1,0 +1,129 @@
+@model List<ApplicationUser>
+@using application
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Travel Reimbursement</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet" />
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>    
+      </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-Light">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3" href="Index.cshtml">Travel Reimbursement</a>
+            <div class="navbar-brand ps-3" style="margin-left: 58%;">
+            <Partial name="_LoginPartial"/>
+            </div>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav"></br>
+
+                            <a class="nav-link" asp-action="Profile" asp-controller="Admin">
+                                <div class="sb-nav-link-icon"><i class="fas fa-user-alt"></i></div>
+                                Profile
+                            </a>
+
+                            <a class="nav-link" id="register" asp-area="Identity" asp-page="/Account/Register">
+                                <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
+                                Add Employee
+                            </a>
+
+                            <a class="nav-link" asp-action="Employeelist" asp-controller="Admin">
+                                <div class="sb-nav-link-icon"><i class="fas fa-list"></i></div>
+                                Employee List
+                            </a>
+
+                            <a class="nav-link" asp-action="Loginstatus" asp-controller="Admin">
+                                <div class="sb-nav-link-icon"><i class="fas fa-clock"></i></div>
+                                Login Status
+                            </a>
+                            
+                            <a class="nav-link" asp-area="" asp-controller="Roles" asp-action="Create">
+                            <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
+                                Roles
+                            </a>
+
+							<a class="nav-link" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt"></i></div> 
+                                Logout
+                            </a>
+
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages"> 
+                                </nav>
+                            </div>
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+            <div class="container-fluid">
+            <div class="row">
+            <div class="row" style="height 2cm"></div>
+            <div class="row">
+                <div class="col-md-10">
+            </div>
+            </div>
+            </br>
+            <div class="head-title">
+            <div class="table">
+                            <div class="order">
+                                <div class="head">
+                                    <h3>Employee List</h3>
+                                </div>
+                                <style>
+                                    th, td {
+                                        padding: 15px;
+                                    }
+                                </style>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Phone Number</th>
+                                            <th>Date of Birth</th>
+                                            <th>Profile Picture</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                @foreach (var p in Model)
+                                {
+                                        <tr>
+                                            <td></td>
+                                            <td>@p.Firstname @p.Lastname</td>
+                                            <td>@p.Email</td>
+                                            <td>@p.PhoneNumber</td>
+                                            <td>@p.DateofBirth.ToString("dd/MM/yyyy")</td>
+                                            <td>  
+                                                <a href="@p.ProfilePicture"><img src="@p.ProfilePicture" width="50"/></a>
+                                            </td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a asp-action="EditEmployee" asp-controller="Admin" asp-route-id="@p.Id">Edit</a>&nbsp;&nbsp;
+                                                    <a asp-action="Delete" asp-controller="Admin" asp-route-id="@p.Id">Delete</a>    
+                                                </div>
+								            </td>
+                                        </tr>
+                                }
+                                    </tbody>
+                                </table>
+                            </div>
+            </div>
+            </div>
+            </div>
+</main>
+</body>
+</html>
